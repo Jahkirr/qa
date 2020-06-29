@@ -1,3 +1,5 @@
+--Построить web-форму для отправки контактных данных, состоящую из полей:ФИО, Телефон, Комментарий
+
 <form name="feedback" method="POST" action="form.php">
   <label>Ваше имя: <input type="text" name="name"></label>
   <label>Ваш email: <input type="text" name="email"></label>
@@ -5,3 +7,23 @@
 
   <input type="submit" name="send" value="Отправить">
 </form>
+
+--Вывести список сотрудников, получающих максимальную заработную плату в своем отделе
+SELECT * 
+FROM Employee AS employees
+WHERE employees.salary = (SELECT MAX(salary) FROM Employee AS max WHERE max.department_id = employees.department_id);
+
+--Вывести список ID отделов, количество сотрудников в которых не превышает 3 человек
+SELECT department_id 
+FROM Employee
+GROUP BY department_id
+HAVING COUNT(*) <= 3;
+
+--Найти список ID отделов с максимальной суммарной зарплатой сотрудников
+WITH dep_salary AS 
+	(SELECT department_id, sum(salary) AS salary
+	FROM employee 
+	GROUP BY department_id)
+SELECT department_id
+FROM dep_salary
+WHERE dep_salary.salary = (SELECT max(salary) FROM dep_salary);
