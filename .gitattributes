@@ -1,2 +1,7 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+<form name="feedback" method="POST" action="form.php">
+  <label>Ваше имя: <input type="text" name="name"></label>
+  <label>Ваш email: <input type="text" name="email"></label>
+  <label>Сообщение: <textarea name="message"></textarea></label>
+
+  <input type="submit" name="send" value="Отправить">
+</form>
